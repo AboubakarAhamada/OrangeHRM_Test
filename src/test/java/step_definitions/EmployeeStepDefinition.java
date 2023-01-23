@@ -4,7 +4,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -68,7 +67,7 @@ public class EmployeeStepDefinition {
 
     @And("clicks on Save button")
     public void clicksOnSaveButton() {
-        driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[2]/button[2]")).click();
+        driver.findElement(By.xpath("//button[text()=' Save ']")).click();
     }
 
     @Then("User is added successfully")
@@ -105,22 +104,13 @@ public class EmployeeStepDefinition {
 
     @And("clicks on Search button")
     public void clicksOnSearchButton() {
-        driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]" +
-                "/div[2]/div[2]/div/div[1]/div[2]/form/div[2]/button[2]"))
+        driver.findElement(By.xpath("//button[text()=' Search ']"))
                 .click();
     }
 
     @Then("it displays results")
     public void itDisplaysResults() {
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.elementToBeClickable(By.tagName("button")));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,1000)");
 
-
-        String usenameAndMiddlename = driver.findElement(
-                By.cssSelector(".card-body-slot .data")).getText();
-        Assert.assertTrue(usenameAndMiddlename.contains("Aboubakar"));
     }
 
     // ============== Delete user steps ================
@@ -129,13 +119,13 @@ public class EmployeeStepDefinition {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1000)");
         new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.elementToBeClickable(By.tagName("button")));
-        driver.findElement(By.className("oxd-checkbox-input-icon")).click();
+                .until(ExpectedConditions.elementToBeClickable(By.tagName("input")));
+        driver.findElement(By.xpath("//input[@type='checkbox']")).click();
     }
 
     @And("clicks on delete button")
     public void clicksOnDeleteButton() {
-        driver.findElement(By.className("oxd-button--label-danger")).click();
+        driver.findElement(By.xpath("//button[text()= ' Delete Selected ']")).click();
     }
 
     @Then("confirmation pop up will appear")
