@@ -25,7 +25,7 @@ public class Hooks {
 
     @After
     public  void tearDown(){
-        new WebDriverWait(driver, Duration.ofSeconds(5))
+        new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.elementToBeClickable(By.tagName("div")));
         driver.quit();
     }
